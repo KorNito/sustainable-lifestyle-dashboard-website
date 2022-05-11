@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RewardsLinks } from "./RewardsLinks";
-import "./Dropdown.css";
+import "./RewardsDropdown.css";
 import { Link } from "react-router-dom";
 
 function RewardsDropdown() {

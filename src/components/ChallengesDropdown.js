@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ChallengesLinks } from "./ChallengesLinks";
-import "./Dropdown.css";
+import "./ChallengesDropdown.css";
 import { Link } from "react-router-dom";
 
 function ChallengesDropdown() {
