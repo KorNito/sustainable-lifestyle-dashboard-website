@@ -1,0 +1,44 @@
+.createRewardContainer {
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.createRewardContainer h1 {
+  margin-top: 5rem;
+  font-size: 20px;
+  color: #00b89f;
+  margin-bottom: 30px;
+}
+
+.createRewardContainer label {
+  text-align: left;
+  display: block;
+}
+
+.createRewardContainer input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.createRewardContainer button {
+  margin-top: 1rem;
+  background: #62c3a5;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.createRewardContainer button:hover {
+  background: #00b89f;
+  cursor: pointer;
+}
+
+.createRewardContainer p {
+  color: red;
+}
