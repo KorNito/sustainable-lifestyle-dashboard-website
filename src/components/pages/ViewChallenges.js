@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { set, ref, onValue, remove, update, query } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import Challenge from "./Challenge";
 
 const ViewChallenges = () => {
