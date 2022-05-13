@@ -7,15 +7,13 @@ const ViewChallenges = () => {
   const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {
-    onValue(ref(db), (snapshot) => {
+    onValue(ref(db, "challenges"), (snapshot) => {
       const challenges = snapshot.val();
       let challengesList = [];
 
-      Object.keys(challenges).map((key) =>
-        Object.keys(challenges[key]).map((property) =>
-          challengesList.push(challenges[key][property])
-        )
-      );
+      for (let id in challenges) {
+        challengesList.push({ id, ...challenges[id] });
+      }
 
       setChallenges(challengesList);
     });
