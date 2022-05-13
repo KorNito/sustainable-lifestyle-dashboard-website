@@ -100,7 +100,7 @@ const CreateChallenge = () => {
 
         <label htmlFor="points">Points</label>
         <input
-          type="text"
+          type="number"
           id="points"
           value={pointsValue}
           onChangeCapture={pointsChangeHandler}
@@ -110,7 +110,7 @@ const CreateChallenge = () => {
 
         <label htmlFor="startDate">Start date</label>
         <input
-          type="text"
+          type="date"
           id="startDate"
           value={startDateValue}
           onChangeCapture={startDateChangeHandler}
@@ -120,7 +120,7 @@ const CreateChallenge = () => {
 
         <label htmlFor="endDate">End date</label>
         <input
-          type="text"
+          type="date"
           id="endDate"
           value={endDateValue}
           onChangeCapture={endDateChangeHandler}
