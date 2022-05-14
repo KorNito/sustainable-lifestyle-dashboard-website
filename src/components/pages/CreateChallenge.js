@@ -6,6 +6,7 @@ const isNotEmpty = (value) => value.trim() !== "";
 
 const CreateChallenge = () => {
   const [isSending, setIsSending] = useState(false);
+  const [created, setCreated] = useState(false);
 
   const {
     value: challengeNameValue,
@@ -62,6 +63,7 @@ const CreateChallenge = () => {
     }
 
     setIsSending(true);
+    setCreated(true);
 
     fetch(
       "https://sustainable-lifestyle-30c7b-default-rtdb.europe-west1.firebasedatabase.app/challenges.json",
@@ -76,18 +78,22 @@ const CreateChallenge = () => {
       }
     );
 
-    setIsSending(false);
-
     resetChallengeName();
     resetPoints();
     resetStartDate();
     resetEndDate();
+
+    setTimeout(() => {
+      setCreated(false);
+      setIsSending(false);
+    }, 2000);
   };
 
   return (
     <div className="createChallengeContainer">
       <form onSubmit={submitHandler}>
         <h1>Create a challenge</h1>
+        {created && <div>Challenge created</div>}
         <label htmlFor="name">Challenge name</label>
         <input
           type="text"
