@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./ViewChallenges.css";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
 import Challenge from "./Challenge";
@@ -19,8 +20,18 @@ const ViewChallenges = () => {
     });
   }, []);
 
+  let content = <p>loading...</p>;
+
+  if (challenges.length > 0) {
+    content = Object.keys(challenges).map((key) => (
+      <tr key={key}>
+        <Challenge challenge={challenges[key]} />
+      </tr>
+    ));
+  }
+
   return (
-    <table>
+    <table className="challenges">
       <thead>
         <tr>
           <th>Challenge Name</th>
@@ -29,13 +40,7 @@ const ViewChallenges = () => {
           <th>End date</th>
         </tr>
       </thead>
-      <tbody>
-        {Object.keys(challenges).map((key) => (
-          <tr key={key}>
-            <Challenge challenge={challenges[key]} />
-          </tr>
-        ))}
-      </tbody>
+      <tbody>{content}</tbody>
     </table>
   );
 };

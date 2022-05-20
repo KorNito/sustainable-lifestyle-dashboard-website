@@ -14,7 +14,12 @@ const Challenge = ({ challenge }) => {
       <td>{challenge.startDate}</td>
       <td>{challenge.endDate}</td>
       <td>
-        <button onClick={() => deleteChallenge(challenge.id)}>Delete</button>
+        <button
+          className="btn btn-delete"
+          onClick={() => deleteChallenge(challenge.id)}
+        >
+          Delete
+        </button>
       </td>
     </>
   );
