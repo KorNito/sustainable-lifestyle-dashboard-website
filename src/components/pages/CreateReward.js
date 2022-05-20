@@ -6,6 +6,7 @@ const isNotEmpty = (value) => value.trim() !== "";
 
 const CreateReward = () => {
   const [isSending, setIsSending] = useState(false);
+  const [created, setCreated] = useState(false);
 
   const {
     value: rewardNameValue,
@@ -38,6 +39,7 @@ const CreateReward = () => {
       return;
     }
 
+    setCreated(true);
     setIsSending(true);
 
     fetch(
@@ -51,16 +53,20 @@ const CreateReward = () => {
       }
     );
 
-    setIsSending(false);
-
     resetChallengeName();
     resetPoints();
+
+    setTimeout(() => {
+      setCreated(false);
+      setIsSending(false);
+    }, 2000);
   };
 
   return (
     <div className="createRewardContainer">
       <form onSubmit={submitHandler}>
         <h1>Create a reward</h1>
+        {created && <div>Reward created</div>}
         <label htmlFor="name">Reward name</label>
         <input
           type="text"
@@ -80,11 +86,9 @@ const CreateReward = () => {
         />
         {pointsHasError && <p>Please enter points</p>}
         {isSending ? (
-          <button disabled>Creating challenge...</button>
+          <button disabled>Creating reward...</button>
         ) : (
-          <button disabled={!formIsValid} type="Submit">
-            Submit
-          </button>
+          <button type="Submit">Submit</button>
         )}
       </form>
     </div>

@@ -1,0 +1,20 @@
+.rewards {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  width: 60%;
+  border: solid black 0.15rem;
+  border-radius: 5px;
+  padding: 8px;
+}
+
+.rewards table {
+  border-collapse: collapse;
+}
+.rewards tr {
+  text-align: center;
+}
+
+.rewards th {
+  color: #00b89f;
+}
