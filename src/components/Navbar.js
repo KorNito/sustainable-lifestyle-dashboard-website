@@ -3,11 +3,13 @@ import { Outlet, Link } from "react-router-dom";
 import "./Navbar.css";
 import ChallengesDropdown from "./ChallengesDropdown";
 import RewardsDropdown from "./RewardsDropdown";
+import PlacesDropdown from "./PlacesDropDown";
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [challengesDropdown, setChallengesDropdown] = useState(false);
   const [rewardsDropdown, setRewardsDropdown] = useState(false);
+  const [placesDropdown, setPlacesDropdown] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -41,6 +43,22 @@ function Navbar() {
       setRewardsDropdown(false);
     } else {
       setRewardsDropdown(false);
+    }
+  };
+
+  const onMousePlacesEnter = () => {
+    if (window.innerWidth < 960) {
+      setPlacesDropdown(false);
+    } else {
+      setPlacesDropdown(true);
+    }
+  };
+
+  const onMousePlacesLeave = () => {
+    if (window.innerWidth < 960) {
+      setPlacesDropdown(false);
+    } else {
+      setPlacesDropdown(false);
     }
   };
 
@@ -82,6 +100,16 @@ function Navbar() {
               Rewards <i className="fas fa-caret-down" />
             </Link>
             {rewardsDropdown && <RewardsDropdown />}
+          </li>
+          <li
+            className="nav-item"
+            onMouseEnter={onMousePlacesEnter}
+            onMouseLeave={onMousePlacesLeave}
+          >
+            <Link to="/places" className="nav-links" onClick={closeMobileMenu}>
+              Places <i className="fas fa-caret-down" />
+            </Link>
+            {placesDropdown && <PlacesDropdown />}
           </li>
         </ul>
       </nav>

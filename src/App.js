@@ -8,6 +8,8 @@ import CreateChallenge from "./components/pages/CreateChallenge";
 import ViewChallenges from "./components/pages/ViewChallenges";
 import CreateReward from "./components/pages/CreateReward";
 import ViewRewards from "./components/pages/ViewRewards";
+import CreatePlace from "./components/pages/CreatePlace";
+import ViewPlaces from "./components/pages/ViewPlaces";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="view-challenges" element={<ViewChallenges />} />
           <Route path="create-reward" element={<CreateReward />} />
           <Route path="view-rewards" element={<ViewRewards />} />
+          <Route path="create-place" element={<CreatePlace />} />
+          <Route path="view-places" element={<ViewPlaces />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

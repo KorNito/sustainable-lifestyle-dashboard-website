@@ -1,0 +1,44 @@
+.createPlaceContainer {
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.createPlaceContainer h1 {
+  margin-top: 5rem;
+  font-size: 20px;
+  color: #00b89f;
+  margin-bottom: 30px;
+}
+
+.createPlaceContainer label {
+  text-align: left;
+  display: block;
+}
+
+.createPlaceContainer input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.createPlaceContainer button {
+  margin-top: 1rem;
+  background: #62c3a5;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.createPlaceContainer button:hover {
+  background: #00b89f;
+  cursor: pointer;
+}
+
+.createPlaceContainer p {
+  color: red;
+}
