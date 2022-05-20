@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import "./ViewRewards.css";
+import "./ViewRewards.css";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
 import Reward from "./Reward";
