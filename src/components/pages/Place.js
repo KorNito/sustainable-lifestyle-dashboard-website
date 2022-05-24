@@ -1,6 +1,7 @@
 import React from "react";
 import { db } from "../../firebase";
 import { ref, remove } from "firebase/database";
+import "./Place.css";
 
 const Place = ({ place }) => {
   const deleteChallenge = (placeId) => {
@@ -14,7 +15,7 @@ const Place = ({ place }) => {
       <td>{place.latitude}</td>
       <td>
         <button
-          className="btn btn-delete"
+          className="delete-button"
           onClick={() => deleteChallenge(place.id)}
         >
           Delete

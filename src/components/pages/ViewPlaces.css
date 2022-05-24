@@ -1,20 +1,40 @@
 .places {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem;
-  width: 60%;
-  border: solid black 0.15rem;
-  border-radius: 5px;
-  padding: 8px;
-}
-
-.places table {
   border-collapse: collapse;
-}
-.places tr {
-  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.places th {
-  color: #00b89f;
+.places thead tr {
+  background-color: #62c3a5;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.places th,
+.places td {
+  padding: 12px 15px;
+}
+
+.places tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.places tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.places tbody tr:last-of-type {
+  border-bottom: 2px solid #62c3a5;
+}
+
+.places tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
 }

@@ -3,6 +3,7 @@ import "./ViewPlaces.css";
 import { db } from "../../firebase";
 import { ref, onValue } from "firebase/database";
 import Place from "./Place";
+import "./ViewPlaces.css";
 
 const ViewRewards = () => {
   const [places, setRewards] = useState([]);
@@ -36,7 +37,9 @@ const ViewRewards = () => {
       <thead>
         <tr>
           <th>Reward Name</th>
-          <th>Points</th>
+          <th>Longitude</th>
+          <th>Latitude</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>{content}</tbody>
