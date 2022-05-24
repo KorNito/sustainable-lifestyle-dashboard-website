@@ -1,6 +1,7 @@
 import React from "react";
 import { db } from "../../firebase";
 import { ref, remove } from "firebase/database";
+import "./Rewards.css";
 
 const Reward = ({ reward }) => {
   const deleteReward = (rewardId) => {
@@ -13,7 +14,7 @@ const Reward = ({ reward }) => {
       <td>{reward.points}</td>
       <td>
         <button
-          className="btn btn-delete"
+          className="delete-button"
           onClick={() => deleteReward(reward.id)}
         >
           Delete

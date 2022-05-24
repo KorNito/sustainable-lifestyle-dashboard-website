@@ -1,20 +1,40 @@
 .rewards {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem;
-  width: 60%;
-  border: solid black 0.15rem;
-  border-radius: 5px;
-  padding: 8px;
-}
-
-.rewards table {
   border-collapse: collapse;
-}
-.rewards tr {
-  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.rewards th {
-  color: #00b89f;
+.rewards thead tr {
+  background-color: #62c3a5;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.rewards th,
+.rewards td {
+  padding: 12px 15px;
+}
+
+.rewards tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.rewards tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.rewards tbody tr:last-of-type {
+  border-bottom: 2px solid #62c3a5;
+}
+
+.rewards tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
 }

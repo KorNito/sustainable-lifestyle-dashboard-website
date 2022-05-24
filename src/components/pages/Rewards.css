@@ -1,0 +1,22 @@
+.reward {
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #230052;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+}
+
+.delete-button {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  color: rgb(230, 31, 31);
+}
+.delete-button:hover {
+  cursor: pointer;
+}
