@@ -1,20 +1,40 @@
 .challenges {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem;
-  width: 60%;
-  border: solid black 0.15rem;
-  border-radius: 5px;
-  padding: 8px;
-}
-
-.challenges table {
   border-collapse: collapse;
-}
-.challenges tr {
-  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.challenges th {
-  color: #00b89f;
+.challenges thead tr {
+  background-color: #62c3a5;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.challenges th,
+.challenges td {
+  padding: 12px 15px;
+}
+
+.challenges tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.challenges tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.challenges tbody tr:last-of-type {
+  border-bottom: 2px solid #009879;
+}
+
+.challenges tbody tr.active-row {
+  font-weight: bold;
+  color: #009879;
 }

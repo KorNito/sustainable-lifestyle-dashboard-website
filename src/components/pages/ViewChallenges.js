@@ -38,6 +38,7 @@ const ViewChallenges = () => {
           <th>Points</th>
           <th>Start date</th>
           <th>End date</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>{content}</tbody>
