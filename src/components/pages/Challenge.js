@@ -1,6 +1,7 @@
 import React from "react";
 import { db } from "../../firebase";
 import { ref, remove } from "firebase/database";
+import "./Challenge.css";
 
 const Challenge = ({ challenge }) => {
   const deleteChallenge = (challengeId) => {
@@ -15,7 +16,7 @@ const Challenge = ({ challenge }) => {
       <td>{challenge.endDate}</td>
       <td>
         <button
-          className="btn btn-delete"
+          className="delete-button"
           onClick={() => deleteChallenge(challenge.id)}
         >
           Delete
