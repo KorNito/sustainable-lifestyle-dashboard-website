@@ -7,15 +7,24 @@ const isNotEmpty = (value) => value.trim() !== "";
 const CreateChallenge = () => {
   const [isSending, setIsSending] = useState(false);
   const [created, setCreated] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [challengeNameValue, setChallengeNameValue] = useState("");
 
-  const {
-    value: challengeNameValue,
-    isValid: challengeNameIsValid,
-    hasError: challengeNameHasError,
-    valueChangeHandler: challengeNameChangeHandler,
-    inputBlurHandler: challengeNameBlurHandler,
-    reset: resetChallengeName,
-  } = useInput(isNotEmpty);
+  const sustainabilityChallenges = ["Reusable cup", "Reusable bag"];
+  const fitnessChallenges = ["Arrive with bicycle"];
+
+  let type = null;
+  let options = null;
+
+  if (selected === "Sustainability challenge") {
+    type = sustainabilityChallenges;
+  } else if (selected === "Fitness challenge") {
+    type = fitnessChallenges;
+  }
+
+  if (type) {
+    options = type.map((el) => <option key={el}>{el}</option>);
+  }
 
   const {
     value: pointsValue,
@@ -46,12 +55,7 @@ const CreateChallenge = () => {
 
   let formIsValid = false;
 
-  if (
-    challengeNameIsValid &&
-    pointsIsValid &&
-    startDateIsValid &&
-    endDateIsValid
-  ) {
+  if (pointsIsValid && startDateIsValid && endDateIsValid) {
     formIsValid = true;
   }
 
@@ -78,7 +82,6 @@ const CreateChallenge = () => {
       }
     );
 
-    resetChallengeName();
     resetPoints();
     resetStartDate();
     resetEndDate();
@@ -89,20 +92,35 @@ const CreateChallenge = () => {
     }, 2000);
   };
 
+  const changeSelectOptionHandler = (event) => {
+    setSelected(event.target.value);
+  };
+
+  const changeOptionHandler = (event) => {
+    setChallengeNameValue(event.target.value);
+    console.log(event.target.value);
+  };
+
   return (
     <div className="createChallengeContainer">
       <form onSubmit={submitHandler}>
         <h1>Create a challenge</h1>
         {created && <div>Challenge created</div>}
-        <label htmlFor="name">Challenge name</label>
-        <input
-          type="text"
-          id="name"
-          value={challengeNameValue}
-          onChangeCapture={challengeNameChangeHandler}
-          onBlur={challengeNameBlurHandler}
-        />
-        {challengeNameHasError && <p>Please enter challenge name</p>}
+
+        <label htmlFor="category">Category</label>
+        <select onChange={(e) => changeSelectOptionHandler(e)}>
+          <option>Sustainability challenge</option>
+          <option>Fitness challenge</option>
+          <option>Nutrition challenge</option>
+          <option>Diversity challenge</option>
+          <option>Remote challenge</option>
+          <option>Civic challenge</option>
+        </select>
+
+        <label htmlFor="challenge">Challenge</label>
+        <select id="challenge" onChange={(e) => changeOptionHandler(e)}>
+          {options}
+        </select>
 
         <label htmlFor="points">Points</label>
         <input
