@@ -5,7 +5,7 @@ import Layout from "./components/Navbar";
 import Home from "./components/pages/Home";
 import NoPage from "./components/pages/NoPage";
 import CreateChallenge from "./components/pages/CreateChallenge";
-import ViewChallenges from "./components/pages/Challenges/ViewChallenges";
+import ViewChallenges from "./components/pages/Challenges/ViewChallenges/ViewChallenges";
 import CreateReward from "./components/pages/CreateReward";
 import ViewRewards from "./components/pages/ViewRewards";
 import CreatePlace from "./components/pages/CreatePlace";
