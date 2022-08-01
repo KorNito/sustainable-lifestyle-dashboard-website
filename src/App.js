@@ -9,7 +9,7 @@ import ViewChallenges from "./components/pages/Challenges/ViewChallenges/ViewCha
 import CreateReward from "./components/pages/CreateReward";
 import ViewRewards from "./components/pages/Rewards/ViewRewards/ViewRewards";
 import CreatePlace from "./components/pages/CreatePlace";
-import ViewPlaces from "./components/pages/ViewPlaces";
+import ViewPlaces from "./components/pages/Places/ViewPlaces/ViewPlaces";
 import CreateCustomChallenge from "./components/pages/CreateCustomChallenge";
 import ViewCustomChallenges from "./components/pages/ViewCustomChallenges";
 
