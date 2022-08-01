@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import "./CreateReward.css";
-import useInput from "../../hooks/use-input";
+import { db } from "../../../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import useInput from "../../../../hooks/use-input";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
 const CreateReward = () => {
   const [isSending, setIsSending] = useState(false);
   const [created, setCreated] = useState(false);
+  const rewardsRef = collection(db, "rewards");
 
   const {
     value: rewardNameValue,
@@ -42,16 +45,7 @@ const CreateReward = () => {
     setCreated(true);
     setIsSending(true);
 
-    fetch(
-      "https://sustainable-lifestyle-30c7b-default-rtdb.europe-west1.firebasedatabase.app/rewards.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          rewardName: rewardNameValue,
-          points: pointsValue,
-        }),
-      }
-    );
+    createReward();
 
     resetChallengeName();
     resetPoints();
@@ -60,6 +54,13 @@ const CreateReward = () => {
       setCreated(false);
       setIsSending(false);
     }, 2000);
+  };
+
+  const createReward = async () => {
+    await addDoc(rewardsRef, {
+      rewardName: rewardNameValue,
+      points: pointsValue,
+    });
   };
 
   return (

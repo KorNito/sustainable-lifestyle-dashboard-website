@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./CreateReward.css";
 import useInput from "../../hooks/use-input";
 
 const isNotEmpty = (value) => value.trim() !== "";
