@@ -32,7 +32,7 @@ const ViewRewards = () => {
     <table className="places">
       <thead>
         <tr>
-          <th>Reward Name</th>
+          <th>Place Name</th>
           <th>Longitude</th>
           <th>Latitude</th>
           <th></th>

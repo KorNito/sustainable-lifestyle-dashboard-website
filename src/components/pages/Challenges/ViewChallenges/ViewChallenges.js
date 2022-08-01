@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ViewChallenges.css";
 import { db } from "../../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import Challenge from "../../Challenge";
+import Challenge from "../../Challenges/Challenge/Challenge";
 
 const ViewChallenges = () => {
   const [challenges, setChallenges] = useState([]);
