@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./CreateChallenge.css";
-import useInput from "../../hooks/use-input";
+import useInput from "../../../../hooks/use-input";
+import { db } from "../../../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -9,6 +11,7 @@ const CreateChallenge = () => {
   const [created, setCreated] = useState(false);
   const [selected, setSelected] = useState("");
   const [challengeNameValue, setChallengeNameValue] = useState("");
+  const challengesRef = collection(db, "challenges");
 
   const sustainabilityChallenges = ["Reusable cup", "Reusable bag"];
   const fitnessChallenges = ["Arrive with bicycle"];
@@ -69,18 +72,7 @@ const CreateChallenge = () => {
     setIsSending(true);
     setCreated(true);
 
-    fetch(
-      "https://sustainable-lifestyle-30c7b-default-rtdb.europe-west1.firebasedatabase.app/challenges.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          challengeName: challengeNameValue,
-          points: pointsValue,
-          startDate: startDateValue,
-          endDate: endDateValue,
-        }),
-      }
-    );
+    createChallenge();
 
     resetPoints();
     resetStartDate();
@@ -90,6 +82,15 @@ const CreateChallenge = () => {
       setCreated(false);
       setIsSending(false);
     }, 2000);
+  };
+
+  const createChallenge = async () => {
+    await addDoc(challengesRef, {
+      challengeName: challengeNameValue,
+      points: pointsValue,
+      startDate: startDateValue,
+      endDate: endDateValue,
+    });
   };
 
   const changeSelectOptionHandler = (event) => {
