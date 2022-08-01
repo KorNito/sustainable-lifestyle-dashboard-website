@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./ViewRewards.css";
-import { db } from "../../firebase";
-import { ref, onValue } from "firebase/database";
-import Reward from "./Reward";
+import { db } from "../../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+import Reward from "../../Reward";
 
 const ViewRewards = () => {
   const [rewards, setRewards] = useState([]);
+  const rewardsRef = collection(db, "rewards");
 
   useEffect(() => {
-    onValue(ref(db, "rewards"), (snapshot) => {
-      const rewards = snapshot.val();
-      let rewardsList = [];
+    const getRewards = async () => {
+      const data = await getDocs(rewardsRef);
+      setRewards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
-      for (let id in rewards) {
-        rewardsList.push({ id, ...rewards[id] });
-      }
-
-      console.log("debug rewards" + rewards);
-      setRewards(rewardsList);
-    });
+    getRewards();
   }, []);
 
   let content = <p>loading...</p>;
 
   if (rewards.length > 0) {
-    content = Object.keys(rewards).map((key) => (
-      <tr key={key}>
-        <Reward reward={rewards[key]} />
+    content = rewards.map((reward) => (
+      <tr key={reward.id}>
+        <Reward reward={reward} />
       </tr>
     ));
   }

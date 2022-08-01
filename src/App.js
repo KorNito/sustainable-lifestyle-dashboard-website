@@ -7,7 +7,7 @@ import NoPage from "./components/pages/NoPage";
 import CreateChallenge from "./components/pages/CreateChallenge";
 import ViewChallenges from "./components/pages/Challenges/ViewChallenges/ViewChallenges";
 import CreateReward from "./components/pages/CreateReward";
-import ViewRewards from "./components/pages/ViewRewards";
+import ViewRewards from "./components/pages/Rewards/ViewRewards/ViewRewards";
 import CreatePlace from "./components/pages/CreatePlace";
 import ViewPlaces from "./components/pages/ViewPlaces";
 import CreateCustomChallenge from "./components/pages/CreateCustomChallenge";
