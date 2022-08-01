@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useReducer } from "react";
 import "./ViewCustomChallenges.css";
-import { db } from "../../firebase";
-import { ref, onValue } from "firebase/database";
+import { db } from "../../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 const initialState = {
   likes: 1,
@@ -27,12 +27,28 @@ const appReducer = (state, action) => {
 
 const ViewCustomChallenges = () => {
   const [customChallenges, setCustomChallenges] = useState([]);
+  const customChallengesRef = collection(db, "customChallenges");
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(10);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getCustomChallenges = async () => {
+      const data = await getDocs(customChallengesRef);
+      setCustomChallenges(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+
+    getCustomChallenges();
+  }, []);
 
   let content = <p>loading...</p>;
+
+  // if (customChallenges.length > 0) {
+  //   content = customChallenges.map((customChallenge) => (
+  //     <tr key={customChallenge.id}>{customChallenge}</tr>
+  //   ));
+  // }
 
   const [state, dispatch] = useReducer(appReducer, initialState);
   const { likes, dislikes } = state;
@@ -93,6 +109,7 @@ const ViewCustomChallenges = () => {
           <th></th>
         </tr>
       </thead>
+      <tbody>{content}</tbody>
       <tr>
         <td>Nutrition challenge</td>
         <td>Buy an apple</td>
