@@ -1,0 +1,16 @@
+.btn {
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.btn:hover {
+  color: #282a2e;
+}
+
+.active,
+.active:hover {
+  color: #1b81f5;
+}

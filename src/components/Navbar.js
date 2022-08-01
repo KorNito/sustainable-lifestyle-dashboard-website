@@ -4,12 +4,15 @@ import "./Navbar.css";
 import ChallengesDropdown from "./ChallengesDropdown";
 import RewardsDropdown from "./RewardsDropdown";
 import PlacesDropdown from "./PlacesDropDown";
+import CustomChallengesDropdown from "./CustomChallengesDropdown";
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [challengesDropdown, setChallengesDropdown] = useState(false);
   const [rewardsDropdown, setRewardsDropdown] = useState(false);
   const [placesDropdown, setPlacesDropdown] = useState(false);
+  const [customChallengesDropdown, setCustomChallengesDropdown] =
+    useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -62,6 +65,22 @@ function Navbar() {
     }
   };
 
+  const onMouseCustomChallengesEnter = () => {
+    if (window.innerWidth < 960) {
+      setCustomChallengesDropdown(false);
+    } else {
+      setCustomChallengesDropdown(true);
+    }
+  };
+
+  const onMouseCustomChallengesLeave = () => {
+    if (window.innerWidth < 960) {
+      setCustomChallengesDropdown(false);
+    } else {
+      setCustomChallengesDropdown(false);
+    }
+  };
+
   return (
     <>
       <nav className="navbar">
@@ -91,6 +110,22 @@ function Navbar() {
             </Link>
             {challengesDropdown && <ChallengesDropdown />}
           </li>
+
+          <li
+            className="nav-item"
+            onMouseEnter={onMouseCustomChallengesEnter}
+            onMouseLeave={onMouseCustomChallengesLeave}
+          >
+            <Link
+              to="/custom-challenges"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
+              Custom challenges <i className="fas fa-caret-down" />
+            </Link>
+            {customChallengesDropdown && <CustomChallengesDropdown />}
+          </li>
+
           <li
             className="nav-item"
             onMouseEnter={onMouseRewardsEnter}
