@@ -1,12 +1,15 @@
-import React, { useState } from "react";
 import "./CreatePlace.css";
-import useInput from "../../hooks/use-input";
+import React, { useState } from "react";
+import { db } from "../../../../firebase";
+import { collection, addDoc } from "firebase/firestore";
+import useInput from "../../../../hooks/use-input";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
 const CreatePlace = () => {
   const [isSending, setIsSending] = useState(false);
   const [created, setCreated] = useState(false);
+  const placesRef = collection(db, "places");
 
   const {
     value: placeNameValue,
@@ -51,17 +54,7 @@ const CreatePlace = () => {
     setCreated(true);
     setIsSending(true);
 
-    fetch(
-      "https://sustainable-lifestyle-30c7b-default-rtdb.europe-west1.firebasedatabase.app/places.json",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          placeName: placeNameValue,
-          longitude: longitudeValue,
-          latitude: latitudeValue,
-        }),
-      }
-    );
+    createPlace();
 
     resetPlaceName();
     resetLongitude();
@@ -71,6 +64,14 @@ const CreatePlace = () => {
       setCreated(false);
       setIsSending(false);
     }, 2000);
+  };
+
+  const createPlace = async () => {
+    await addDoc(placesRef, {
+      placeName: placeNameValue,
+      longitude: longitudeValue,
+      latitude: latitudeValue,
+    });
   };
 
   return (

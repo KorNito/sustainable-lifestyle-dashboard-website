@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Navbar";
 import Home from "./components/pages/Home";
 import NoPage from "./components/pages/NoPage";
-import CreateChallenge from "./components/pages/CreateChallenge";
+import CreateChallenge from "./components/pages//Challenges/CreateChallenge/CreateChallenge";
 import ViewChallenges from "./components/pages/Challenges/ViewChallenges/ViewChallenges";
 import CreateReward from "./components/pages/CreateReward";
 import ViewRewards from "./components/pages/Rewards/ViewRewards/ViewRewards";
-import CreatePlace from "./components/pages/CreatePlace";
+import CreatePlace from "./components/pages/Places/CreatePlace/CreatePlace";
 import ViewPlaces from "./components/pages/Places/ViewPlaces/ViewPlaces";
 import CreateCustomChallenge from "./components/pages/CreateCustomChallenge";
-import ViewCustomChallenges from "./components/pages/ViewCustomChallenges";
+import ViewCustomChallenges from "./components/pages/Challenges/ViewCustomChallenges/ViewCustomChallenges";
 
 function App() {
   return (
