@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ViewPlaces.css";
 import { db } from "../../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import Place from "../../Place";
+import Place from "../../Places/Place/Place";
 import "./ViewPlaces.css";
 
 const ViewRewards = () => {
