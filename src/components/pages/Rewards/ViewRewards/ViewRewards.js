@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ViewRewards.css";
 import { db } from "../../../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import Reward from "../../Reward";
+import Reward from "../../Rewards/Reward/Reward";
 
 const ViewRewards = () => {
   const [rewards, setRewards] = useState([]);

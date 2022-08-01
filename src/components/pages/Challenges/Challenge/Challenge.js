@@ -1,7 +1,7 @@
 import React from "react";
 import { db } from "../../../../firebase";
-import "./Challenge.css";
 import { deleteDoc, doc } from "firebase/firestore";
+import "./Challenge.css";
 
 const Challenge = ({ challenge }) => {
   const deleteChallenge = async (challengeId) => {

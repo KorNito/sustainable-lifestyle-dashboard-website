@@ -1,11 +1,13 @@
 import React from "react";
-import { db } from "../../firebase";
-import { ref, remove } from "firebase/database";
+import { db } from "../../../../firebase";
+import { deleteDoc, doc } from "firebase/firestore";
 import "./Rewards.css";
 
 const Reward = ({ reward }) => {
-  const deleteReward = (rewardId) => {
-    remove(ref(db, `rewards/${rewardId}`));
+  const deleteReward = async (rewardId) => {
+    const rewardToDelete = doc(db, "rewards", rewardId);
+    await deleteDoc(rewardToDelete);
+    window.location.reload();
   };
 
   return (
