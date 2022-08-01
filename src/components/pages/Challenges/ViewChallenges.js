@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from "react";
 import "./ViewChallenges.css";
-import { db } from "../../firebase";
-import { ref, onValue } from "firebase/database";
-import Challenge from "./Challenge";
+import { db } from "../../../firebase";
+import { collection, getDocs } from "firebase/firestore";
+import Challenge from "../Challenge";
 
 const ViewChallenges = () => {
   const [challenges, setChallenges] = useState([]);
+  const challengesRef = collection(db, "challenges");
 
   useEffect(() => {
-    onValue(ref(db, "challenges"), (snapshot) => {
-      const challenges = snapshot.val();
-      let challengesList = [];
+    const getChallenges = async () => {
+      const data = await getDocs(challengesRef);
+      setChallenges(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
 
-      for (let id in challenges) {
-        challengesList.push({ id, ...challenges[id] });
-      }
-
-      setChallenges(challengesList);
-    });
+    getChallenges();
   }, []);
 
   let content = <p>loading...</p>;
 
   if (challenges.length > 0) {
-    content = Object.keys(challenges).map((key) => (
-      <tr key={key}>
-        <Challenge challenge={challenges[key]} />
+    content = challenges.map((challenge) => (
+      <tr key={challenge.id}>
+        <Challenge challenge={challenge} />
       </tr>
     ));
   }
@@ -45,4 +42,5 @@ const ViewChallenges = () => {
     </table>
   );
 };
+
 export default ViewChallenges;

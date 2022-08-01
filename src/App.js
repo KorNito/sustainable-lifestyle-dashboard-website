@@ -5,11 +5,13 @@ import Layout from "./components/Navbar";
 import Home from "./components/pages/Home";
 import NoPage from "./components/pages/NoPage";
 import CreateChallenge from "./components/pages/CreateChallenge";
-import ViewChallenges from "./components/pages/ViewChallenges";
+import ViewChallenges from "./components/pages/Challenges/ViewChallenges";
 import CreateReward from "./components/pages/CreateReward";
 import ViewRewards from "./components/pages/ViewRewards";
 import CreatePlace from "./components/pages/CreatePlace";
 import ViewPlaces from "./components/pages/ViewPlaces";
+import CreateCustomChallenge from "./components/pages/CreateCustomChallenge";
+import ViewCustomChallenges from "./components/pages/ViewCustomChallenges";
 
 function App() {
   return (
@@ -19,6 +21,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path="create-challenge" element={<CreateChallenge />} />
           <Route path="view-challenges" element={<ViewChallenges />} />
+          <Route
+            path="create-custom-challenge"
+            element={<CreateCustomChallenge />}
+          />
+          <Route
+            path="view-custom-challenges"
+            element={<ViewCustomChallenges />}
+          />
           <Route path="create-reward" element={<CreateReward />} />
           <Route path="view-rewards" element={<ViewRewards />} />
           <Route path="create-place" element={<CreatePlace />} />
