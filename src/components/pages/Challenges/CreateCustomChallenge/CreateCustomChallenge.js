@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import useInput from "../../hooks/use-input";
-import { db } from "../../firebase";
+import useInput from "../../../../hooks/use-input";
+import { db } from "../../../../firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 
 const isNotEmpty = (value) => value.trim() !== "";

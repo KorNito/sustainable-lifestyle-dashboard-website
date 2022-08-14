@@ -10,7 +10,7 @@ import CreateReward from "./components/pages//Rewards/CreateReward/CreateReward"
 import ViewRewards from "./components/pages/Rewards/ViewRewards/ViewRewards";
 import CreatePlace from "./components/pages/Places/CreatePlace/CreatePlace";
 import ViewPlaces from "./components/pages/Places/ViewPlaces/ViewPlaces";
-import CreateCustomChallenge from "./components/pages/CreateCustomChallenge";
+import CreateCustomChallenge from "./components/pages/Challenges/CreateCustomChallenge/CreateCustomChallenge";
 import ViewCustomChallenges from "./components/pages/Challenges/ViewCustomChallenges/ViewCustomChallenges";
 
 function App() {
