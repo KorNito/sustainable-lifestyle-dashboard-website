@@ -12,7 +12,7 @@ const Place = ({ place }) => {
 
   return (
     <>
-      <td>{place.title}</td>
+      <td>{place.placeName}</td>
       <td>{place.longitude}</td>
       <td>{place.latitude}</td>
       <td>
