@@ -102,7 +102,7 @@ function Navbar() {
             onMouseLeave={onMouseChallengesLeave}
           >
             <Link
-              to="/challenges"
+              to="/view-challenges"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -117,7 +117,7 @@ function Navbar() {
             onMouseLeave={onMouseCustomChallengesLeave}
           >
             <Link
-              to="/custom-challenges"
+              to="/view-custom-challenges"
               className="nav-links"
               onClick={closeMobileMenu}
             >
@@ -131,7 +131,11 @@ function Navbar() {
             onMouseEnter={onMouseRewardsEnter}
             onMouseLeave={onMouseRewardsLeave}
           >
-            <Link to="/rewards" className="nav-links" onClick={closeMobileMenu}>
+            <Link
+              to="/view-rewards"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
               Rewards <i className="fas fa-caret-down" />
             </Link>
             {rewardsDropdown && <RewardsDropdown />}
@@ -141,7 +145,11 @@ function Navbar() {
             onMouseEnter={onMousePlacesEnter}
             onMouseLeave={onMousePlacesLeave}
           >
-            <Link to="/places" className="nav-links" onClick={closeMobileMenu}>
+            <Link
+              to="/view-places"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
               Places <i className="fas fa-caret-down" />
             </Link>
             {placesDropdown && <PlacesDropdown />}
