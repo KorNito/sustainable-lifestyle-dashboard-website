@@ -1,33 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CreateChallenge.css";
 import useInput from "../../../../hooks/use-input";
 import { db } from "../../../../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
 const CreateChallenge = () => {
   const [isSending, setIsSending] = useState(false);
   const [created, setCreated] = useState(false);
-  const [selected, setSelected] = useState("");
+
   const [challengeNameValue, setChallengeNameValue] = useState("");
   const challengesRef = collection(db, "challenges");
 
-  const sustainabilityChallenges = ["Reusable cup", "Reusable bag"];
-  const fitnessChallenges = ["Arrive with bicycle"];
+  const [sustainableLifestyleCategories, setSustainableLifestyleCategories] =
+    useState([]);
+  const sustainableLifestyleCategoryRef = collection(
+    db,
+    "sustainableLifestyleCategories"
+  );
 
-  let type = null;
-  let options = null;
-
-  if (selected === "Sustainability challenge") {
-    type = sustainabilityChallenges;
-  } else if (selected === "Fitness challenge") {
-    type = fitnessChallenges;
-  }
-
-  if (type) {
-    options = type.map((el) => <option key={el}>{el}</option>);
-  }
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const {
     value: pointsValue,
@@ -58,6 +51,17 @@ const CreateChallenge = () => {
 
   let formIsValid = false;
 
+  useEffect(() => {
+    const getChallengeCategories = async () => {
+      const data = await getDocs(sustainableLifestyleCategoryRef);
+      setSustainableLifestyleCategories(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+
+    getChallengeCategories();
+  }, []);
+
   if (pointsIsValid && startDateIsValid && endDateIsValid) {
     formIsValid = true;
   }
@@ -86,6 +90,7 @@ const CreateChallenge = () => {
 
   const createChallenge = async () => {
     await addDoc(challengesRef, {
+      sustainabilityCategory: selectedCategory,
       challengeName: challengeNameValue,
       points: pointsValue,
       startDate: startDateValue,
@@ -93,13 +98,22 @@ const CreateChallenge = () => {
     });
   };
 
-  const changeSelectOptionHandler = (event) => {
-    setSelected(event.target.value);
+  let selectedSustainabilityCategory = [];
+
+  if (selectedCategory !== "") {
+    selectedSustainabilityCategory = sustainableLifestyleCategories.filter(
+      (sustainableLifestyleCategory) => {
+        return sustainableLifestyleCategory.category === selectedCategory;
+      }
+    );
+  }
+
+  const changeCategoryOptionHandler = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
-  const changeOptionHandler = (event) => {
+  const changeChallengeOptionHandler = (event) => {
     setChallengeNameValue(event.target.value);
-    console.log(event.target.value);
   };
 
   return (
@@ -109,18 +123,29 @@ const CreateChallenge = () => {
         {created && <div>Challenge created</div>}
 
         <label htmlFor="category">Category</label>
-        <select onChange={(e) => changeSelectOptionHandler(e)}>
-          <option>Sustainability challenge</option>
-          <option>Fitness challenge</option>
-          <option>Nutrition challenge</option>
-          <option>Diversity challenge</option>
-          <option>Remote challenge</option>
-          <option>Civic challenge</option>
+        <select onChange={changeCategoryOptionHandler}>
+          <option value="" selected disabled hidden>
+            Select sustainability category
+          </option>
+          {sustainableLifestyleCategories.map((challengeCategory) => (
+            <option value={challengeCategory.category}>
+              {challengeCategory.category}
+            </option>
+          ))}
         </select>
 
         <label htmlFor="challenge">Challenge</label>
-        <select id="challenge" onChange={(e) => changeOptionHandler(e)}>
-          {options}
+        <select onChange={(e) => changeChallengeOptionHandler(e)}>
+          <option value="" selected disabled hidden>
+            Select sustainability challenge
+          </option>
+          {selectedSustainabilityCategory.map((selectedCategoryChallenges) =>
+            selectedCategoryChallenges.challenges.map((challenge) => (
+              <option value={selectedCategoryChallenges.challenge}>
+                {challenge}
+              </option>
+            ))
+          )}
         </select>
 
         <label htmlFor="points">Points</label>
