@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useInput from "../../hooks/use-input";
+import { db } from "../../firebase";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 const isNotEmpty = (value) => value.trim() !== "";
 
@@ -7,67 +9,97 @@ const CreateCustomChallenge = () => {
   const [isSending, setIsSending] = useState(false);
   const [created, setCreated] = useState(false);
 
+  const [sustainableLifestyleCategories, setSustainableLifestyleCategories] =
+    useState([]);
+  const sustainableLifestyleCategoryRef = collection(
+    db,
+    "sustainableLifestyleCategories"
+  );
+
+  const customChallengesRef = collection(db, "customChallenges");
+
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   const {
-    value: rewardNameValue,
-    isValid: rewardNameIsValid,
-    hasError: rewardNameHasError,
-    valueChangeHandler: rewardNameChangeHandler,
-    inputBlurHandler: rewardNameBlurHandler,
-    reset: resetChallengeName,
+    value: customChallengeNameValue,
+    isValid: customChallengedNameIsValid,
+    hasError: customChallengeNameHasError,
+    valueChangeHandler: customChallengeNameChangeHandler,
+    inputBlurHandler: customChallengedNameBlurHandler,
+    reset: resetCustomChallengeName,
   } = useInput(isNotEmpty);
 
-  // let formIsValid = false;
+  useEffect(() => {
+    const getChallengeCategories = async () => {
+      const data = await getDocs(sustainableLifestyleCategoryRef);
+      setSustainableLifestyleCategories(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
 
-  // if (rewardNameIsValid && pointsIsValid) {
-  //   formIsValid = true;
-  // }
+    getChallengeCategories();
+  }, []);
+
+  let formIsValid = false;
+
+  if (customChallengedNameIsValid) {
+    formIsValid = true;
+  }
 
   const submitHandler = (event) => {
-    //   event.preventDefault();
-    //   if (!formIsValid) {
-    //     return;
-    //   }
-    //   setCreated(true);
-    //   setIsSending(true);
-    //   fetch(
-    //     "https://sustainable-lifestyle-30c7b-default-rtdb.europe-west1.firebasedatabase.app/rewards.json",
-    //     {
-    //       method: "POST",
-    //       body: JSON.stringify({
-    //         rewardName: rewardNameValue,
-    //         points: pointsValue,
-    //       }),
-    //     }
-    //   );
-    //   resetChallengeName();
-    //   resetPoints();
-    //   setTimeout(() => {
-    //     setCreated(false);
-    //     setIsSending(false);
-    //   }, 2000);
+    event.preventDefault();
+    if (!formIsValid) {
+      return;
+    }
+
+    setCreated(true);
+    setIsSending(true);
+
+    createCustomChallenge();
+
+    resetCustomChallengeName();
+
+    setTimeout(() => {
+      setCreated(false);
+      setIsSending(false);
+    }, 2000);
+  };
+
+  const createCustomChallenge = async () => {
+    await addDoc(customChallengesRef, {
+      sustainabilityCategory: selectedCategory,
+      name: customChallengeNameValue,
+      likes: 0,
+      dislikes: 0,
+    });
+  };
+
+  const changeCategoryOptionHandler = (event) => {
+    setSelectedCategory(event.target.value);
   };
 
   return (
     <div className="createRewardContainer">
       <form onSubmit={submitHandler}>
         <h1>Create custom challenge</h1>
-        <label htmlFor="category">Category</label>
-        <select>
-          <option>Sustainability challenge</option>
-          <option>Fitness challenge</option>
-          <option>Nutrition challenge</option>
-          <option>Diversity challenge</option>
-          <option>Remote challenge</option>
-          <option>Civic challenge</option>
-        </select>
         {created && <div>Reward created</div>}
+        <select onChange={changeCategoryOptionHandler}>
+          <option value="" selected disabled hidden>
+            Select sustainability category
+          </option>
+          {sustainableLifestyleCategories.map((challengeCategory) => (
+            <option value={challengeCategory.category}>
+              {challengeCategory.category}
+            </option>
+          ))}
+        </select>
         <label htmlFor="name">Challenge name</label>
         <input
           type="text"
           id="name"
-          value={rewardNameValue}
-          onChangeCapture={rewardNameChangeHandler}
-          onBlur={rewardNameBlurHandler}
+          value={customChallengeNameValue}
+          onChangeCapture={customChallengeNameChangeHandler}
+          onBlur={customChallengedNameBlurHandler}
         />
         {isSending ? (
           <button disabled>Creating reward...</button>
