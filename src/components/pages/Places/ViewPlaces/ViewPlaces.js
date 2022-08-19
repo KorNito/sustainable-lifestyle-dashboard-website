@@ -16,7 +16,7 @@ const ViewRewards = () => {
     };
 
     getPlaces();
-  }, []);
+  }, [placesRef]);
 
   let content = <p>loading...</p>;
 

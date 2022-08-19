@@ -7,7 +7,6 @@ const Place = ({ place }) => {
   const deleteChallenge = async (placeId) => {
     const placeToDelete = doc(db, "places", placeId);
     await deleteDoc(placeToDelete);
-    window.location.reload();
   };
 
   return (

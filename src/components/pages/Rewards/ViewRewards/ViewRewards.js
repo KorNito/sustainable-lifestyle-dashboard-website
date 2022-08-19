@@ -15,7 +15,7 @@ const ViewRewards = () => {
     };
 
     getRewards();
-  }, []);
+  }, [rewardsRef]);
 
   let content = <p>loading...</p>;
 

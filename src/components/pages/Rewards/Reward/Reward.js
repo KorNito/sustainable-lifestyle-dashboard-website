@@ -7,7 +7,6 @@ const Reward = ({ reward }) => {
   const deleteReward = async (rewardId) => {
     const rewardToDelete = doc(db, "rewards", rewardId);
     await deleteDoc(rewardToDelete);
-    window.location.reload();
   };
 
   return (

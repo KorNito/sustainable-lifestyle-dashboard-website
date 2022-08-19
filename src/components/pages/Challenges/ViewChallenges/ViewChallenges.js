@@ -15,7 +15,7 @@ const ViewChallenges = () => {
     };
 
     getChallenges();
-  }, []);
+  }, [challengesRef]);
 
   let content = <p>loading...</p>;
 
