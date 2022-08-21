@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import "./Login.css";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { UserContext } from "../../../context/UserContext";
 
@@ -25,20 +26,25 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <input
-        placeholder="Email"
-        name="email"
-        type="email"
-        onChange={(event) => handleInputs(event)}
-      />
-      <input
-        placeholder="Password"
-        name="password"
-        type="password"
-        onChange={(event) => handleInputs(event)}
-      />
-      <button onClick={login}>Login</button>
+    <div class="login-page">
+      <div class="form">
+        <form class="login-form" onSubmit={login}>
+          <input
+            type="email"
+            placeholder="email"
+            onChange={(event) => handleInputs(event)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            onChange={(event) => handleInputs(event)}
+          />
+          <button>login</button>
+          <p class="message">
+            Not registered? <a href="#">Create an account</a>
+          </p>
+        </form>
+      </div>
     </div>
   );
 };
