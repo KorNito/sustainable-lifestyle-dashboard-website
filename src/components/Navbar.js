@@ -90,6 +90,7 @@ function Navbar() {
   const logout = () => {
     signOut(auth);
     setCurrentUser();
+    localStorage.removeItem("user");
   };
 
   return (

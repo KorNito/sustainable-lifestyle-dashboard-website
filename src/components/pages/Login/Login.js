@@ -21,6 +21,7 @@ const Login = () => {
   const login = () => {
     signInWithEmailAndPassword(auth, data.email, data.password);
     setCurrentUser(data.email);
+    localStorage.setItem("user", JSON.stringify(data.email));
   };
 
   return (

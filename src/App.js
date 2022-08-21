@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -17,6 +17,12 @@ import ViewCustomChallenges from "./components/pages/Challenges/ViewCustomChalle
 import { UserContext } from "./context/UserContext";
 
 function App() {
+  let localStorageUser = localStorage.getItem("user");
+
+  useEffect(() => {
+    setCurrentUser(localStorageUser);
+  }, [localStorageUser]);
+
   const [currentUser, setCurrentUser] = useState();
 
   return (
