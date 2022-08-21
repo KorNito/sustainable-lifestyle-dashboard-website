@@ -71,6 +71,7 @@ const CreatePlace = () => {
       placeName: placeNameValue,
       longitude: longitudeValue,
       latitude: latitudeValue,
+      createdBy: localStorage.getItem("user"),
     });
   };
 

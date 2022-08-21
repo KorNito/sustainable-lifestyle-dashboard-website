@@ -60,6 +60,7 @@ const CreateReward = () => {
     await addDoc(rewardsRef, {
       rewardName: rewardNameValue,
       points: pointsValue,
+      createBy: localStorage.getItem("user"),
     });
   };
 

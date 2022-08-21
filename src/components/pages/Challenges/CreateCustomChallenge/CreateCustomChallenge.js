@@ -71,6 +71,7 @@ const CreateCustomChallenge = () => {
       name: customChallengeNameValue,
       likes: 0,
       dislikes: 0,
+      createBy: localStorage.getItem("user"),
     });
   };
 

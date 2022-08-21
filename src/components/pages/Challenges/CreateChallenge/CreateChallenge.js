@@ -95,6 +95,7 @@ const CreateChallenge = () => {
       points: pointsValue,
       startDate: startDateValue,
       endDate: endDateValue,
+      createdBy: localStorage.getItem("user"),
     });
   };
 
