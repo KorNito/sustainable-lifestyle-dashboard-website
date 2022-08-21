@@ -167,7 +167,9 @@ function Navbar() {
             {placesDropdown && <PlacesDropdown />}
           </li>
         </ul>
-        <button onClick={logout}>Logout</button>
+        <button className="logout-button" onClick={logout}>
+          Logout
+        </button>
       </nav>
       <Outlet />
     </>
