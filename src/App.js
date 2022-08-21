@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Navbar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Login from "./components/pages/Login/Login";
+import SignUp from "./components/pages/SignUp/SignUp";
 import Home from "./components/pages/Home";
 import NoPage from "./components/pages/NoPage";
 import CreateChallenge from "./components/pages//Challenges/CreateChallenge/CreateChallenge";
@@ -12,31 +14,40 @@ import CreatePlace from "./components/pages/Places/CreatePlace/CreatePlace";
 import ViewPlaces from "./components/pages/Places/ViewPlaces/ViewPlaces";
 import CreateCustomChallenge from "./components/pages/Challenges/CreateCustomChallenge/CreateCustomChallenge";
 import ViewCustomChallenges from "./components/pages/Challenges/ViewCustomChallenges/ViewCustomChallenges";
+import { UserContext } from "./context/UserContext";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState();
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="create-challenge" element={<CreateChallenge />} />
-          <Route path="view-challenges" element={<ViewChallenges />} />
-          <Route
-            path="create-custom-challenge"
-            element={<CreateCustomChallenge />}
-          />
-          <Route
-            path="view-custom-challenges"
-            element={<ViewCustomChallenges />}
-          />
-          <Route path="create-reward" element={<CreateReward />} />
-          <Route path="view-rewards" element={<ViewRewards />} />
-          <Route path="create-place" element={<CreatePlace />} />
-          <Route path="view-places" element={<ViewPlaces />} />
-          <Route path="*" element={<NoPage />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <UserContext.Provider value={{ currentUser, setCurrentUser }}>
+      <Router>
+        <Routes>
+          {currentUser ? (
+            <Route path="/" element={<Navbar />}>
+              <Route index element={<Home />} />
+              <Route path="create-challenge" element={<CreateChallenge />} />
+              <Route path="view-challenges" element={<ViewChallenges />} />
+              <Route
+                path="create-custom-challenge"
+                element={<CreateCustomChallenge />}
+              />
+              <Route
+                path="view-custom-challenges"
+                element={<ViewCustomChallenges />}
+              />
+              <Route path="create-reward" element={<CreateReward />} />
+              <Route path="view-rewards" element={<ViewRewards />} />
+              <Route path="create-place" element={<CreatePlace />} />
+              <Route path="view-places" element={<ViewPlaces />} />
+              <Route path="*" element={<NoPage />} />
+            </Route>
+          ) : (
+            <Route path="/" element={<Login />} />
+          )}
+        </Routes>
+      </Router>
+    </UserContext.Provider>
   );
 }
 

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import "./Navbar.css";
 import ChallengesDropdown from "./ChallengesDropdown";
 import RewardsDropdown from "./RewardsDropdown";
 import PlacesDropdown from "./PlacesDropDown";
 import CustomChallengesDropdown from "./CustomChallengesDropdown";
+import { UserContext } from "../context/UserContext";
+import { getAuth, signOut } from "firebase/auth";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -13,6 +15,10 @@ function Navbar() {
   const [placesDropdown, setPlacesDropdown] = useState(false);
   const [customChallengesDropdown, setCustomChallengesDropdown] =
     useState(false);
+
+  const auth = getAuth();
+
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -79,6 +85,11 @@ function Navbar() {
     } else {
       setCustomChallengesDropdown(false);
     }
+  };
+
+  const logout = () => {
+    signOut(auth);
+    setCurrentUser();
   };
 
   return (
@@ -155,6 +166,7 @@ function Navbar() {
             {placesDropdown && <PlacesDropdown />}
           </li>
         </ul>
+        <button onClick={logout}>Logout</button>
       </nav>
       <Outlet />
     </>
