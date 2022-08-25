@@ -124,7 +124,7 @@ const CreateChallenge = () => {
         {created && <div>Challenge created</div>}
 
         <label htmlFor="category">Category</label>
-        <select onChange={changeCategoryOptionHandler}>
+        <select id="categories" onChange={changeCategoryOptionHandler}>
           <option value="" selected disabled hidden>
             Select sustainability category
           </option>
@@ -136,7 +136,10 @@ const CreateChallenge = () => {
         </select>
 
         <label htmlFor="challenge">Challenge</label>
-        <select onChange={(e) => changeChallengeOptionHandler(e)}>
+        <select
+          id="challenge"
+          onChange={(e) => changeChallengeOptionHandler(e)}
+        >
           <option value="" selected disabled hidden>
             Select sustainability challenge
           </option>
